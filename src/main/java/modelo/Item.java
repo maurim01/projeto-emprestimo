@@ -5,15 +5,18 @@ public abstract class Item {
     private String patrimonio;
     private String descricao;
     private boolean disponivel;
+    private RegraMulta regraMulta;
 
-    public Item(String patrimonio, String descricao, boolean disponivel) {
+    public Item(String patrimonio, String descricao, RegraMulta regraMulta, boolean disponivel ) {
         setPatrimonio(patrimonio);
         setDescricao(descricao);
+        this.regraMulta = regraMulta;
         this.disponivel = disponivel;
+
     }
 
-    public Item(String patrimonio, String descricao) {
-        this(patrimonio, descricao, true);
+    public Item(String patrimonio, String descricao, RegraMulta regraMulta) {
+        this(patrimonio, descricao, regraMulta, true);
     }
 
     public String getPatrimonio() {
@@ -27,6 +30,10 @@ public abstract class Item {
         else{
             this.patrimonio = patrimonio;
         }
+    }
+
+    public double calcularValorMulta(int diasAtraso){
+        return regraMulta.calcularMulta(diasAtraso);
     }
 
     public String getDescricao() {
