@@ -4,6 +4,16 @@ public class SemMulta implements RegraMulta{
 
     @Override
     public double calcularMulta(int diasAtraso) {
-        return 0;
+
+        if (diasAtraso == 0) {
+            return 0;
+        }
+        if (diasAtraso < 0) {
+            throw new IllegalArgumentException("O valor dos dias de atraso não podem ser negativos. ");
+        }
+        else{
+            return 0;
+        }
     }
+
 }

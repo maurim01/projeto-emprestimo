@@ -2,16 +2,18 @@ package modelo;
 
 public abstract class Item {
 
-    private String patrimonio;
-    private String descricao;
+    private String patrimonio, descricao;
     private boolean disponivel;
     private RegraMulta regraMulta;
 
     public Item(String patrimonio, String descricao, RegraMulta regraMulta, boolean disponivel ) {
         setPatrimonio(patrimonio);
         setDescricao(descricao);
-        this.regraMulta = regraMulta;
         this.disponivel = disponivel;
+        if(regraMulta == null){
+            throw new IllegalArgumentException("A regra de multa não pode ser vazia");
+        }
+        this.regraMulta = regraMulta;
 
     }
 
@@ -33,6 +35,7 @@ public abstract class Item {
     }
 
     public double calcularValorMulta(int diasAtraso){
+
         return regraMulta.calcularMulta(diasAtraso);
     }
 
@@ -61,7 +64,7 @@ public abstract class Item {
     public String toString() {
         return "Patrimonio:" + patrimonio + "\n" +
                 "Descrição: " + descricao + "\n" +
-                "Diponivel: " + ((isDisponivel()) ? "Está disponível" : "Não está disponivel");
+                "Disponivel: " + ((isDisponivel()) ? "Está disponível" : "Não está disponivel");
     }
 
     public abstract int getPrazoDias();
